@@ -348,6 +348,8 @@ For each [release](https://github.com/sql-js/sql.js/releases/), you will find a 
  - `sql-asm.js` : The older asm.js version of Sql.js. Slower and larger. Provided for compatibility reasons.
  - `sql-asm-memory-growth.js` : Asm.js doesn't allow for memory to grow by default, because it is slower and de-optimizes. If you are using sql-asm.js and you see this error (`Cannot enlarge memory arrays`), use this file.
  - `sql-asm-debug.js` : The _Debug_ asm.js version of Sql.js. Use this for local development.
+ - `sql-legacy.js` : The older asm.js version of Sql.js compiled with LEGACY_VM_SUPPORT for older browsers. Slower and larger. Provided for further compatibility reasons.
+ - `sql-legacy-debug.js` : The _Debug_ LEGACY_VM_SUPPORT asm.js version of Sql.js. Use this for local development.
  - `worker.*` - Web Worker versions of the above libraries. More limited API. See [examples/GUI/gui.js](examples/GUI/gui.js) for a good example of this.
 
 ## Compiling/Contributing
