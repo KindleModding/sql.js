@@ -77,7 +77,7 @@ EXPORTED_METHODS_JSON_FILES = src/exported_functions.json src/exported_runtime_m
 all: optimized debug worker
 
 .PHONY: debug
-debug: dist/sql-asm-debug.js dist/sql-wasm-debug.js
+debug: dist/sql-legacy-debug.js dist/sql-asm-debug.js dist/sql-wasm-debug.js
 
 dist/sql-legacy-debug.js: $(BITCODE_FILES) $(OUTPUT_WRAPPER_FILES) $(SOURCE_API_FILES) $(EXPORTED_METHODS_JSON_FILES)
 	$(EMCC) $(EMFLAGS) $(EMFLAGS_DEBUG) $(EMFLAGS_LEGACY) $(BITCODE_FILES) $(EMFLAGS_PRE_JS_FILES) -o $@
@@ -126,7 +126,13 @@ dist/sql-asm-memory-growth.js: $(BITCODE_FILES) $(OUTPUT_WRAPPER_FILES) $(SOURCE
 
 # Web worker API
 .PHONY: worker
-worker: dist/worker.sql-asm.js dist/worker.sql-asm-debug.js dist/worker.sql-wasm.js dist/worker.sql-wasm-debug.js
+worker: dist/worker.sql-legacy.js dist/worker.sql-legacy-debug.js dist/worker.sql-asm.js dist/worker.sql-asm-debug.js dist/worker.sql-wasm.js dist/worker.sql-wasm-debug.js
+
+dist/worker.sql-legacy.js: dist/sql-legacy.js src/worker.js
+	cat $^ > $@
+
+dist/worker.sql-legacy-debug.js: dist/sql-legacy-debug.js src/worker.js
+	cat $^ > $@
 
 dist/worker.sql-asm.js: dist/sql-asm.js src/worker.js
 	cat $^ > $@
